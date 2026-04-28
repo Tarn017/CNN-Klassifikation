@@ -1,4 +1,4 @@
-# Image_Classification
+# Image Classification with CNNs
 
 **1.** To start, download the following file and drop it in the folder you are working in: 
 
