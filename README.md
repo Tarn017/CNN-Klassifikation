@@ -1,43 +1,36 @@
 # Image Classification with CNNs
 
 **1.** To start, download the following file and drop it in the folder you are working in: 
+Um ein Modell zu trainieren, muss nun zusätzlich ein Trainingsskript am Anfang importiert werden: `from project import CNN`. Konkret handelt es sich hierbei um ein Convolutional Neural Network, das sich flexibel einstellen lässt. Wichtig ist, dass die Funktion `CNN()` ebenfalls wieder eingerückt unter `if __name__ == "__main__":` steht. Hier eine kurze Erklärung, wie man die Funktion nutzt:  
+`CNN(train_path, epochs, lr, conv_filters, fully_layers, resize, model_name, train_split, droprate, augmentation, dec_lr)`  
+1. *train_path* entspricht dem Ordner auf den ihr das Netz trainieren wollt
+2. *epochs* entspricht der Anzahl an Epochen, die das Netz trainiert werden soll
+3. *lr* entspricht der Lernrate
+4. *conv_filters* hat die Form [x,y,z,...], wobei x der Anzahl an convolutional Filtern in der 1. Schicht entsprich, y der Anzahl in der 2., usw. Die GEsamtzahl an Schichten wird somit ebenfalls hier bestimmt.
+5. *fully_layers* hat die Form [x,y,z,...], wobei x der Anzahl an Neuronen in der 1. voll verbundenen Schicht entspricht, usw.
+6. *resize* hat die form (höhe,breite), wobei beide Angaben in Anzahl Pixel gemacht werden. Quadratische Angaben werden bevorzugt
+7. *model_name* gibt eurem Modell einen Namen. Beachte: Existiert bereits eines mit demselben Namen, wird das alte überschrieben.
+8. *train_split* bspw. 0.8 bedeutet, dass 80% der Bilder fürs Training und 20% für Validation genutzt werden. Bei 1 werden alle Daten für das Training genutzt.
+9. *droprate* (optional) bspw 0.2 bedeutet, dass jedes Neuron mit einer Wahrscheinlichkeit von 20% deaktiviert wird.
+10. *augmentation* (optional) hat die Form [flip, rotate, brightness, contrast, saturation]. Jeder dieser Werte muss zwischen 0 und 1 liegen. *flip* ist die Wahrscheinlichkeit, dass ein Bild gespiegelt wird, *rotate* gibt die Stärke einer zufälligen Rotation an (1 für stark), *brightness, contrast, saturation* geben an wie stark Helligkeit, Kontrast und Sättigung maximal verändert werden.
+11. *dec_lr* (optional) wirg genutzt, falls die Lernrate während des Trainigs abnehmen soll. Der Wert der für diesen Parameter angegeben wird, entspricht der Lernrate der letzten Epoche.
 
-**2.** After that, create a new python file in that same directory. Copy the following code into that file:
+Hier ein Beispiel. Wichtig ist, dass Anführungszeichen übernommen werden, dort wo sie gebraucht werden und der Datentyp für jedem Parameter richtig gewählt ist: 
 ```python
-from train_NN import CNN
-
-if __name__ == "__main__":
-```
-**Important:** Everything you do from now on should be inserted below the code you just copied. It's also important to 
-
-**Example**
-```python
-from train_NN import CNN
+from project import CNN
 
 if __name__ == "__main__":
     CNN(
-        train_path="./klass_daten/",
-        epochs=30,
-        lr=0.005,
+        train_path="zml_klass",
+        epochs=15,
+        lr=0.001,
         conv_filters=[16, 32, 64, 128],
         fully_layers=[256],
         resize=(128, 128),
         model_name='peter',
         train_split=0.9,
-        droprate=0.5,
-        augmentation=[0.1,0.1,0.1,0.1,0.1],
-        dec_lr=10e-5
-    )
-```
-**Explanation of the parameters**
-`train_path`: The path to the folder you want to classify. If in the same directory, just change the "klass_daten" to the name of your folder.
-`epochs`: Number of training epochs.
-`lr`: Learning rate.
-`conv_filters`: Number and size of convolutional filters in the order of usage.
-`fully_layers`: Number and size of fully connected layers, following the convolutional layers.
-`resize`: Resize the pictures in the dataset into a suitable one (height,width).
-`model_name`: Name the model you are creating.
-`train_split`: E.g. 0.9 means, that 90/% of the data will be used for training and 10/% for validation.
-`droprate`: Dropout probability (optional).
+        droprate=0,
+        augmentation=[0, 0, 0, 0, 0],
+        dec_lr=0.001
     )
 ```
