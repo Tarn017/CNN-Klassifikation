@@ -1,7 +1,11 @@
 # Image Classification with CNNs
 
-**1.** To start, download the following file and drop it in the folder you are working in: 
-Um ein Modell zu trainieren, muss nun zusätzlich ein Trainingsskript am Anfang importiert werden: `from project import CNN`. Konkret handelt es sich hierbei um ein Convolutional Neural Network, das sich flexibel einstellen lässt. Wichtig ist, dass die Funktion `CNN()` ebenfalls wieder eingerückt unter `if __name__ == "__main__":` steht. Hier eine kurze Erklärung, wie man die Funktion nutzt:  
+**Vorgehen:**  
+1. Ladet zunächst die beiden Skripte [ConvNeuralNetwork.py](https://github.com/Tarn017/CNN-Klassifikation/blob/main/ConvNeuralNetwork.py) und [main_CNN.py](https://github.com/Tarn017/CNN-Klassifikation/blob/main/main_CNN.py) herunter.  
+2. Kopiert die beiden Skripte in euer Python-Projekt.  
+
+**Training:**  
+Öffnet nun das Skript `main_CNN` und passt eure Parameter entsprechend an. Hier eine kurze Erklärung, wie man die Funktion nutzt:  
 `CNN(train_path, epochs, lr, conv_filters, fully_layers, resize, model_name, train_split, droprate, augmentation, dec_lr)`  
 1. *train_path* entspricht dem Ordner auf den ihr das Netz trainieren wollt
 2. *epochs* entspricht der Anzahl an Epochen, die das Netz trainiert werden soll
@@ -15,22 +19,20 @@ Um ein Modell zu trainieren, muss nun zusätzlich ein Trainingsskript am Anfang 
 10. *augmentation* (optional) hat die Form [flip, rotate, brightness, contrast, saturation]. Jeder dieser Werte muss zwischen 0 und 1 liegen. *flip* ist die Wahrscheinlichkeit, dass ein Bild gespiegelt wird, *rotate* gibt die Stärke einer zufälligen Rotation an (1 für stark), *brightness, contrast, saturation* geben an wie stark Helligkeit, Kontrast und Sättigung maximal verändert werden.
 11. *dec_lr* (optional) wirg genutzt, falls die Lernrate während des Trainigs abnehmen soll. Der Wert der für diesen Parameter angegeben wird, entspricht der Lernrate der letzten Epoche.
 
-Hier ein Beispiel. Wichtig ist, dass Anführungszeichen übernommen werden, dort wo sie gebraucht werden und der Datentyp für jedem Parameter richtig gewählt ist: 
 ```python
-from project import CNN
+from ConvNeuralNetwork import CNN
 
 if __name__ == "__main__":
     CNN(
-        train_path="zml_klass",
-        epochs=15,
-        lr=0.001,
+        train_path="tiere400",
+        epochs=10,
+        lr=0.005,
         conv_filters=[16, 32, 64, 128],
         fully_layers=[256],
         resize=(128, 128),
         model_name='peter',
         train_split=0.9,
-        droprate=0,
-        augmentation=[0, 0, 0, 0, 0],
-        dec_lr=0.001
+        droprate=0.5,
+        augmentation=[0.1,0.1,0.1,0.1,0.1],
+        dec_lr=10e-5
     )
-```
