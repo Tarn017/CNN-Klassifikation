@@ -5,7 +5,7 @@
 2. Kopiert die beiden Skripte in euer Python-Projekt.  
 
 **Training:**  
-Öffnet nun das Skript `main_CNN` und passt eure Parameter entsprechend an. Hier eine kurze Erklärung, wie man die Funktion nutzt:  
+Öffnet nun das Skript `main_CNN.py` und passt eure Parameter entsprechend an. Hier eine kurze Erklärung, wie man die Funktion nutzt:  
 `CNN(train_path, epochs, lr, conv_filters, fully_layers, resize, model_name, train_split, droprate, augmentation, dec_lr)`  
 1. *train_path* entspricht dem Ordner auf den ihr das Netz trainieren wollt
 2. *epochs* entspricht der Anzahl an Epochen, die das Netz trainiert werden soll
